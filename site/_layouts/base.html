@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: " en " }}">
+{% include head.html %}
+<body>
+    {% include header.html %}
+    <div role="main" class="container">
+        {{ content }}
+    </div>
+
+    <!-- JS -->
+    <script src="{{ "/static/js/jquery-3.3.1.min.js" | relative_url }}"></script>
+    <script src="{{ "/static/js/popper.min.js" | relative_url }}"></script>
+    <script src="{{ "/static/bootstrap-4.0.0-dist/js/bootstrap.min.js" | relative_url }}"></script>
+    {% include footer.html %}
+</body>
+</html>

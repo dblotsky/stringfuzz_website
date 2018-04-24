@@ -1,0 +1,15 @@
+# directories
+.sass-cache
+.jekyll-metadata
+vendor
+problems
+_site
+site/static/txt/samples
+site/static/results
+
+# files
+site/_data/problems.yml
+
+# extensions
+*.zip
+*.pdf

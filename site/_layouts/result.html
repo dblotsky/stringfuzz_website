@@ -1,0 +1,57 @@
+---
+layout: text_page
+---
+
+{% include collection_prev_next.html %}
+
+{{ content }}
+
+<div class="row prev-next" role="toolbar">
+    <div class="col-4 col-sm-3 col-md-2">
+        <a href="{{ prevurl }}" class="btn btn-block btn-outline-dark btn-lg {% unless prevurl %}disabled{% endunless %}" role="button">&larr; Prev</a>
+    </div>
+    <div class="col-4 col-sm-6 col-md-8">
+        <p class="instructions d-none d-sm-block">
+            arrow keys move to previous/next result
+        </p>
+    </div>
+    <div class="col-4 col-sm-3 col-md-2">
+        <a href="{{ nexturl }}" class="btn btn-block btn-outline-dark btn-lg {% unless nexturl %}disabled{% endunless %}" role="button">Next &rarr;</a>
+    </div>
+</div>
+
+<div class="row">
+    {% for problem in site.data.problems %}
+
+        {% capture imgurl %}{{ '/static/results/'
+            | append: page.title
+            | replace: ' ','-'
+            | downcase
+            | append: '/graphs/cactus/'
+            | append: problem.name
+            | append: '-cactus.png'
+            | relative_url }}{% endcapture %}
+
+        <figure class="figure col-6 col-sm-4 col-md-3">
+            <a href="{{ imgurl }}">
+                <img class="figure-img img-fluid rounded" src="{{ imgurl }}">
+            </a>
+        </figure>
+    {% endfor %}
+</div>
+
+<script>
+document.body.onkeyup = function(e){
+    {% if prevurl %}
+        if (e.keyCode == '37') {
+            window.location = '{{ prevurl }}';
+        }
+    {% endif %}
+
+    {% if nexturl %}
+        if (e.keyCode == '39') {
+            window.location = '{{ nexturl }}';
+        }
+    {% endif %}
+};
+</script>

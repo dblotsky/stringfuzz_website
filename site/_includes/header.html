@@ -1,0 +1,51 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+
+        <!-- title -->
+        <a class="navbar-brand" href="{{ "/" | relative_url }}">
+            {{ site.title | escape }}
+        </a>
+
+        <!-- button for toggling navigation on small screens -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- navbar content -->
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+
+                <!-- curly brace -->
+                <li class="nav-item">
+                    <span class="d-none d-md-block curly nav-link disabled">}</span>
+                    &nbsp;
+                    &nbsp;
+                </li>
+
+                <!-- links -->
+                {% for link in site.data.header %}
+                    {% if link.external %}
+                        {% continue %}
+                    {% endif %}
+                    <li class="nav-item {% if page.url == link.uri %}active{% endif %}">
+                        <a class="nav-link" href="{{ link.uri }}">{{ link.name | escape }} <span class="sr-only">(current)</span></a>
+                    </li>
+                {% endfor %}
+
+                <li><span class="d-none d-md-block nav-link disabled">|</span></li>
+                <li><span class="nav-link disabled">External links:</span></li>
+
+                {% for link in site.data.header %}
+
+                    {% unless link.external %}
+                        {% continue %}
+                    {% endunless %}
+
+                    <li class="nav-item {% if page.url == link.uri %}active{% endif %}">
+                        <a class="nav-link" href="{{ link.uri }}">{{ link.name | escape }} <span class="sr-only">(current)</span></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
+</header>

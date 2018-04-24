@@ -1,0 +1,32 @@
+-
+    uri: "https://sites.google.com/site/z3strsolver/"
+    name: Z3str3 Solver
+    external: yes
+-
+    uri: "https://github.com/dblotsky/stringfuzz"
+    name: Source Code
+    external: yes
+-
+    uri: "https://github.com/dblotsky/stringfuzz/releases"
+    name: Releases
+    external: yes
+-
+    uri: "https://github.com/dblotsky/stringfuzz/blob/master/README.md"
+    name: Documentation
+    external: yes
+-
+    uri: "https://zyh1121.github.io/z3str3Docs/inputLanguage.html"
+    name: Language Reference
+    external: yes
+-
+    uri: "/results/"
+    name: Experiments
+-
+    uri: "/problems/"
+    name: Problem Sets
+-
+    uri: "/people/"
+    name: People
+# -
+#     uri: "/static/pdf/dblotsky2017.pdf"
+#     name: Paper

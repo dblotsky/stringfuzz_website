@@ -1,0 +1,18 @@
+{% capture the_collection %}{{ page.collection }}{% endcapture %}
+
+{% if page.collection %}
+    {% assign document = site[the_collection] %}
+{% endif %}
+
+{% for links in document  %}
+    {% if links.title == page.title %}
+        {% unless forloop.first %}
+            {% assign prevurl = prev.url %}
+        {% endunless %}
+        {% unless forloop.last %}
+            {% assign next = document[forloop.index] %}
+            {% assign nexturl = next.url %}
+        {% endunless %}
+    {% endif %}
+    {% assign prev = links %}
+{% endfor %}

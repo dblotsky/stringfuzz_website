@@ -1,0 +1,32 @@
+body {
+    padding-top: 56px;
+}
+
+.curly {
+    font-size: 2em;
+    position: absolute;
+    padding: 0px;
+    margin-top: -0.2em;
+    margin-left: -0.25em;
+}
+
+.results-table {
+    padding-top: 1em;
+}
+
+.prev-next {
+    padding-bottom: 1em;
+}
+
+.instructions {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.1);
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+footer {
+    margin-top: 1%;
+    width: 100%;
+    text-align: center;
+}

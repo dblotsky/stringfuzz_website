@@ -1,0 +1,385 @@
+# lengths
+-
+    name: lengths-short
+    answer: sat
+    description: |
+        Each instance has {num_vars} variables. Each variable's
+        length is constrained randomly from {args[min_length]} to X.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: lengths
+    args:
+        num_vars: 30
+        min_length: 0
+        max_length: '{x}'
+        num_concats: 0
+        random_relations: false
+    count: 50
+    count_each: 2
+    start: 1
+    increment: 5
+-
+    name: lengths-long
+    answer: sat
+    description: |
+        Each instance has {num_vars} variables. Each variable's
+        length is constrained randomly from {args[min_length]} to X.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: lengths
+    args:
+        num_vars: 30
+        min_length: 0
+        max_length: '{x}'
+        num_concats: 0
+        random_relations: false
+    count: 50
+    count_each: 2
+    start: 1
+    increment: 100
+-
+    name: lengths-concats
+    answer: sat
+    description: |
+        Each instance has X variables, and Y random unique binary
+        concats of those variables.
+
+        X | {start}0 &le; X &le; {end}0 in increments of {increment}.
+        Y | {start} &le; Y &le; {end} in increments of {increment}.
+    generator: lengths
+    args:
+        num_vars: '{x}0'
+        min_length: 0
+        max_length: 100
+        num_concats: '{x}'
+        random_relations: false
+    count: 50
+    count_each: 2
+    start: 1
+    increment: 1
+
+# concats
+-
+    name: concats-small
+    answer: sat
+    description: |
+        Each instance is a right-heavy concat tree of depth X,
+        equal to the string `"{solution}"`.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: concats
+    args:
+        depth: '{x}'
+        depth_type: semantic
+        solution: solution
+        balanced: false
+        num_extracts: 0
+        max_extract_index: 0
+    count: 30
+    count_each: 2
+    start: 1
+    increment: 3
+-
+    name: concats-big
+    answer: sat
+    description: |
+        Each instance is a right-heavy concat tree of depth X,
+        equal to the string `"{solution}"`.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: concats
+    args:
+        depth: '{x}'
+        depth_type: semantic
+        solution: solution
+        balanced: false
+        num_extracts: 0
+        max_extract_index: 0
+    count: 30
+    count_each: 2
+    start: 1
+    increment: 40
+-
+    name: concats-balanced
+    answer: sat
+    description: |
+        Each instance is a balanced concat tree of depth X,
+        equal to the string `"{solution}"`.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: concats
+    args:
+        depth: '{x}'
+        depth_type: syntactic
+        solution: solution
+        balanced: true
+        num_extracts: 0
+        max_extract_index: 0
+    count: 10
+    count_each: 10
+    start: 1
+    increment: 1
+-
+    name: concats-extracts-small
+    answer: both
+    description: |
+        Each instance is a right-heavy concat tree of depth {depth},
+        equal to the string `"{solution}"`, followed by X extracts of
+        1 character each, from a random index Y.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+        Y | 0 &le; Y &le; {max_extract_index}.
+    generator: concats
+    args:
+        depth: 30
+        depth_type: semantic
+        solution: solution
+        balanced: false
+        num_extracts: '{x}'
+        max_extract_index: 100
+    count: 30
+    count_each: 2
+    start: 1
+    increment: 1
+-
+    name: concats-extracts-big
+    answer: both
+    description: |
+        Each instance is a right-heavy concat tree of depth {depth},
+        equal to the string `"{solution}"`, followed by X extracts of
+        1 character each, from a random index Y.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+        Y | 0 &le; Y &le; {max_extract_index}.
+    generator: concats
+    args:
+        depth: 30
+        depth_type: semantic
+        solution: solution
+        balanced: false
+        num_extracts: '{x}'
+        max_extract_index: 1000
+    count: 30
+    count_each: 2
+    start: 1
+    increment: 40
+
+# overlaps
+-
+    name: overlaps-small
+    answer: both
+    description: |
+        Each instance is an equation of the form a.V = V.b, where
+        V is a concatenation of X variables.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: overlaps
+    args:
+        num_vars: '{x}'
+        length_of_consts: 3
+    count: 30
+    count_each: 2
+    start: 1
+    increment: 1
+-
+    name: overlaps-big
+    answer: both
+    description: |
+        Each instance is an equation of the form a.V = V.b, where
+        V is a concatenation of X variables.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: overlaps
+    args:
+        num_vars: '{x}'
+        length_of_consts: 3
+    count: 10
+    count_each: 2
+    start: 1
+    increment: 15
+
+# regex
+-
+    name: regex-small
+    answer: sat
+    description: |
+        Each instance tests whether a variable belongs to a random regex.
+        The regex is a concatenation of X random regex terms of depth {term_depth}.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: regex
+    args:
+        num_regexes: 1
+        num_terms: '{x}'
+        literal_min: 1
+        literal_max: 3
+        term_depth: 2
+        literal_type: increasing
+        membership_type: in
+        reset_alphabet: no
+        max_var_length:
+        min_var_length:
+        operators: 'spu'
+        operator_type: random
+    count: 30
+    count_each: 2
+    start: 1
+    increment: 2
+-
+    name: regex-big
+    answer: sat
+    description: |
+        Each instance tests whether a variable belongs to a random regex.
+        The regex is a concatenation of X random regex terms of depth {term_depth}.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: regex
+    args:
+        num_regexes: 1
+        num_terms: '{x}'
+        literal_min: 1
+        literal_max: 3
+        term_depth: 2
+        literal_type: increasing
+        membership_type: in
+        reset_alphabet: no
+        max_var_length:
+        min_var_length:
+        operators: 'spu'
+        operator_type: random
+    count: 30
+    count_each: 2
+    start: 1
+    increment: 7
+-
+    name: regex-deep
+    answer: both
+    description: |
+        Each instance tests whether a variable belongs to a random regex.
+        The regex is a concatenation of {num_terms} random regex terms of
+        depth X. The variable is at least {min_var_length} characters long.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: regex
+    args:
+        num_regexes: 1
+        num_terms: 2
+        literal_min: 1
+        literal_max: 3
+        term_depth: '{x}'
+        literal_type: increasing
+        membership_type: in
+        reset_alphabet: no
+        max_var_length:
+        min_var_length: 15
+        operators: 'spu'
+        operator_type: random
+    count: 15
+    count_each: 3
+    start: 0
+    increment: 1
+-
+    name: many-regexes
+    answer: both
+    description: |
+        Each instance tests whether a variable is in X regexes. Each regex
+        is a concatenation of {num_terms} terms of depth {term_depth}.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: regex
+    args:
+        num_regexes: '{x}'
+        num_terms: 10
+        literal_min: 1
+        literal_max: 3
+        term_depth: 2
+        literal_type: increasing
+        membership_type: in
+        reset_alphabet: yes
+        max_var_length:
+        min_var_length:
+        operators: 'spu'
+        operator_type: random
+    count: 20
+    count_each: 2
+    start: 1
+    increment: 3
+-
+    name: regex-pair
+    answer: both
+    description: |
+        Each instance tests whether a variable is in one regex but not another.
+        Each regex is a concatenation of X terms of depth {term_depth}.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: regex
+    args:
+        num_regexes: 2
+        num_terms: '{x}'
+        literal_min: 1
+        literal_max: 3
+        term_depth: 2
+        literal_type: increasing
+        membership_type: alternating
+        reset_alphabet: yes
+        max_var_length:
+        min_var_length:
+        operators: 'spu'
+        operator_type: random
+    count: 20
+    count_each: 2
+    start: 1
+    increment: 5
+-
+    name: regex-lengths
+    answer: both
+    description: |
+        Each instance tests whether a variable is in a regex, and constrains
+        the variable to a minimum length of X. The regex contains {num_terms}
+        terms, each of depth {term_depth}.
+
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: regex
+    args:
+        num_regexes: 1
+        num_terms: 10
+        literal_min: 1
+        literal_max: 3
+        term_depth: 2
+        literal_type: increasing
+        membership_type: alternating
+        reset_alphabet: no
+        max_var_length:
+        min_var_length: '{x}'
+        operators: 'spu'
+        operator_type: random
+    count: 20
+    count_each: 2
+    start: 1
+    increment: 25
+
+# hard
+-
+    name: different-prefix
+    answer: unsat
+    description: |
+        Each instance is a problem of the form V = a.Y = b.Y where
+        V is a variable.
+
+        a, b | string literals, a &ne; b.
+        Y | a concatenation of X variables.
+        X | {start} &le; X &le; {end} in increments of {increment}.
+    generator: equality
+    args:
+        num_expressions: 2
+        num_terms: '{x}'
+        prefix_length: 5
+        suffix_length: 0
+        add_infixes: false
+        infix_length: 0
+        randomise_lengths: false
+        infix_probability: 0.5
+    count: 30
+    count_each: 2
+    start: 2
+    increment: 1
