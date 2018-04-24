@@ -47,9 +47,7 @@ default all: $(BUILD_DIR)
 
 install: rbinstall pyinstall
 
-rbinstall: Gemfile
-	-gem install bundle
-	bundle
+rbinstall: vendor/bundle/ruby/2.3.0/bin/jekyll
 
 pyinstall: requirements.txt
 	pip install -r requirements.txt
@@ -67,6 +65,12 @@ deploy: $(BUILD_DIR)
 results: $(RESULT_PAGES)
 
 # real targets
+/usr/local/bin/bundle:
+	gem install bundle
+
+./vendor/bundle/ruby/2.3.0/bin/jekyll: Gemfile /usr/local/bin/bundle
+	bundle
+
 $(BUILD_DIR): $(SOURCES) $(ZIP_DIR) $(PROBLEM_ARCHIVE) $(SAMPLE_DIR)
 	$(JEKYLL) build $(JEKYLL_ARGS)
 
