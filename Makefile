@@ -15,11 +15,12 @@ JEKYLL_ARGS = --source $(SRC_DIR) --destination $(BUILD_DIR) --config $(CONFIG)
 SRC_DIR         = site
 BUILD_DIR       = _site
 PROBLEM_DIR     = problems
+RESULTS_DIR     = ../runs
 DATA_DIR        = $(SRC_DIR)/_data
 STATIC_DIR      = $(SRC_DIR)/static
 ZIP_DIR         = $(STATIC_DIR)/zip
 SAMPLE_DIR      = $(STATIC_DIR)/txt/samples
-RESULTS_DIR     = $(STATIC_DIR)/results
+RESULTS_LINK    = $(STATIC_DIR)/results
 RESULT_PAGE_DIR = $(SRC_DIR)/_results
 
 # files
@@ -33,7 +34,7 @@ CSS_SOURCES       = $(shell find $(SRC_DIR) -name *.css)
 DATA_SOURCES      = $(shell find $(SRC_DIR) -name *.yml) $(PROBLEMS_FILE)
 PROBLEM_ARCHIVE   = $(ZIP_DIR)/problems.zip
 
-RESULT_NAMES = $(shell ls $(RESULTS_DIR))
+RESULT_NAMES = $(shell ls $(RESULTS_LINK))
 RESULT_PAGES = $(addsuffix .md,$(addprefix $(RESULT_PAGE_DIR)/,$(RESULT_NAMES)))
 
 SOURCES = $(HTML_SOURCES) $(JS_SOURCES) $(CSS_SOURCES) $(DATA_SOURCES) $(RESULT_PAGES)
@@ -64,12 +65,17 @@ deploy: $(BUILD_DIR)
 
 results: $(RESULT_PAGES)
 
+link_results: $(RESULTS_LINK)
+
 # real targets
 /usr/local/bin/bundle:
 	gem install bundle
 
 ./vendor/bundle/ruby/2.3.0/bin/jekyll: Gemfile /usr/local/bin/bundle
 	bundle
+
+$(RESULTS_LINK): $(RESULTS_DIR)
+	ln -s $(realpath $(RESULTS_DIR)) $(RESULTS_LINK)
 
 $(BUILD_DIR): $(SOURCES) $(ZIP_DIR) $(PROBLEM_ARCHIVE) $(SAMPLE_DIR)
 	$(JEKYLL) build $(JEKYLL_ARGS)
@@ -106,7 +112,7 @@ $(SAMPLE_DIR): $(PROBLEM_DIR)
 	done
 	touch $(SAMPLE_DIR)
 
-$(SRC_DIR)/_results/%.md: $(RESULTS_DIR)/% bin/make_date.py
+$(SRC_DIR)/_results/%.md: $(RESULTS_LINK)/% bin/make_date.py | $(RESULTS_LINK)
 	echo '---' > $@
 	python3 bin/make_date.py $@ >> $@
 	echo '---' >> $@
