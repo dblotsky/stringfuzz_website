@@ -48,7 +48,7 @@ default all: $(BUILD_DIR)
 
 install: rbinstall pyinstall
 
-rbinstall: vendor/bundle/ruby/2.3.0/bin/jekyll
+rbinstall: vendor/bundle
 
 pyinstall: requirements.txt
 	pip install -r requirements.txt
@@ -71,7 +71,7 @@ link_results: $(RESULTS_LINK)
 /usr/local/bin/bundle:
 	gem install bundle
 
-./vendor/bundle/ruby/2.3.0/bin/jekyll: Gemfile /usr/local/bin/bundle
+./vendor/bundle: Gemfile /usr/local/bin/bundle
 	bundle
 
 $(RESULTS_LINK): $(RESULTS_DIR)
