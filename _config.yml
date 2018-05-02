@@ -1,14 +1,11 @@
 title: StringFuzz
 description: >
-    String Fuzz is an SMT 2.x fuzzer. This web site has links to the source,
-    documentation, experiments, and papers related to the fuzzer.
+    StringFuzz is a fuzzer for string SMT solvers. This web site has links
+    to the source code, documentation, experiments, benchmarks, and papers
+    related to StringFuzz.
 
 baseurl: ""
 url: "stringfuzz.dmitryblotsky.com"
-
-email: dmitry.blotsky@gmail.com
-twitter_username: dblotsky
-github_username: dblotsky
 
 markdown: kramdown
 
