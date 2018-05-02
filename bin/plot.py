@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 
-RESULTS = "../results/*.csv"
-IMAGE_DIR = "../images"
-
 import pygal
 from pygal.style import Style
 
 import glob
 import os
+import sys
 import time
 import csv
+
+# globals
+image_dir = "../images"
 
 class CustomStyle(Style):
     """A light style with strong colors"""
@@ -67,11 +68,11 @@ def get_category_data(data):
 
 def plot_cacti(data):
     overall = get_cactus(data, "SAT/UNSAT Cactus: Overall (%s)" %(time.strftime("%d/%m/%Y")))
-    overall.render_to_file("%s/%s"%(IMAGE_DIR, "overall_cactus.svg"))
+    overall.render_to_file("%s/%s"%(image_dir, "overall_cactus.svg"))
     category_data = get_category_data(data)
     for category, cat_data in sorted(category_data.items()):
         cactus = get_cactus(cat_data, "SAT/UNSAT Cactus: %s" %(category.upper()))
-        cactus.render_to_file("%s/%s"%(IMAGE_DIR, "%s_cactus.svg" % category))
+        cactus.render_to_file("%s/%s"%(image_dir, "%s_cactus.svg" % category))
 
 def get_cactus(data, title):
     cactus = pygal.XY(stroke=False, title=title, y_title="Time (s)", dots_size=5, tooltip_border_radius=10, style=CustomStyle, legend_at_bottom=True, legend_at_bottom_columns=4)
@@ -84,11 +85,11 @@ def get_cactus(data, title):
 
 def plot_bars(data):
     overall = get_bar(data, "Result Distribution: Overall (%s)" %(time.strftime("%d/%m/%Y")))
-    overall.render_to_file("%s/%s"%(IMAGE_DIR, "overall_bar.svg"))
+    overall.render_to_file("%s/%s"%(image_dir, "overall_bar.svg"))
     category_data = get_category_data(data)
     for category, cat_data in sorted(category_data.items()):
         bar = get_bar(cat_data, "Result Distribution: %s" %(category.upper()))
-        bar.render_to_file("%s/%s"%(IMAGE_DIR, "%s_bar.svg" % category))
+        bar.render_to_file("%s/%s"%(image_dir, "%s_bar.svg" % category))
 
 def get_bar(data, title):
     overall = pygal.Bar(title=title, tooltip_border_radius=10, style=CustomStyle, legend_at_bottom=True, legend_at_bottom_columns=4)
@@ -134,7 +135,7 @@ def plot_time_for_model(data):
     for solver, points in sorted(solver_data.items()):
         points = [{'value': (p[0], p[1]), 'label': p[-1], 'xlink':"%s/%s"%(p[2], p[3])} for p in points]
         cactus.add(solver, points)
-    cactus.render_to_file("%s/%s"%(IMAGE_DIR, "models_dots.svg"))
+    cactus.render_to_file("%s/%s"%(image_dir, "models_dots.svg"))
 
     overall = pygal.Bar(title="Get-Sat Vs. Get-Model Average", y_title="Time (s)", tooltip_border_radius=10, style=CustomStyle, legend_at_bottom=True, legend_at_bottom_columns=4)
     overall.x_labels = ["Get-Sat", "Get-Model"]
@@ -143,11 +144,22 @@ def plot_time_for_model(data):
         tsat = sum([p[0] for p in points])/float(number)
         tmodel = sum([p[1] for p in points])/float(number)
         overall.add(solver, [tsat, tmodel])
-    overall.render_to_file("%s/%s"%(IMAGE_DIR, "models_bars.svg"))
+    overall.render_to_file("%s/%s"%(image_dir, "models_bars.svg"))
 
 def main():
+    global image_dir
+
+    # get args
+    results_dir = sys.argv[1]
+    image_dir   = sys.argv[2]
+
+    # get result files
+    results_glob = os.path.join(results_dir, "*.csv")
+    result_files = glob.glob(results_glob)
+
     points = {}
-    result_files = glob.glob(RESULTS)
+
+    # generate data
     for result in result_files:
         solver = os.path.basename(result)[:-len(".csv")]
         with open(result, "r") as data:
@@ -160,6 +172,7 @@ def main():
                 else:
                     points[solver] = [point]
 
+    # generate graphs
     plot_cacti(points)
     plot_bars(points)
     plot_time_for_model(points)

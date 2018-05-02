@@ -6,6 +6,8 @@ problems
 _site
 site/static/txt/samples
 site/static/results
+site/static/csv/benchmarks
+site/static/svg/plots
 
 # files
 site/_data/problems.yml

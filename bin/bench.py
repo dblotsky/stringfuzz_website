@@ -12,9 +12,7 @@ from collections import namedtuple
 from operator import attrgetter
 
 # arguments
-TIMEOUT     = 30.0
-PROBLEMS    = "../problems/**/*.smt25"
-RESULTS_DIR = "../results"
+TIMEOUT = 30.0
 
 # data
 CSV_HEADER  = "Category,Instance,Result,Time\n"
@@ -101,15 +99,27 @@ def signal_handler(signal, frame):
 
 def main():
     global DATA
+
+    # get args
+    problem_dir = sys.argv[1]
+    results_dir = sys.argv[2]
+
+    # set up signal handler
     signal.signal(signal.SIGTERM, signal_handler)
-    problems = glob.glob(PROBLEMS)
+
+    # get list of problems
+    problems_glob = os.path.join(problem_dir, '**', '*.smt25')
+    problems      = glob.glob(problems_glob)
+
+    # run solvers on problems
     for solver, command in SOLVERS.items():
         for problem in problems:
             result = run_problem(solver, command, problem)
             DATA[solver].append(result)
 
+    # write out results
     for solver, data in DATA.items():
-        filename = "%s/%s.csv" %(RESULTS_DIR, solver)
+        filename = "%s/%s.csv" %(results_dir, solver)
         with open(filename, 'w') as fp:
             fp.write(CSV_HEADER)
             for point in data:

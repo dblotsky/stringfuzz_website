@@ -28,29 +28,14 @@ title: String Benchmarks
     <br>
     <hr>
     <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/overall_cactus.svg" type="image/svg+xml">
-                <img src="./images/overall_cactus.svg" />
+        <div class="col-6">
+            <object data="{{ "/static/svg/plots/overall_cactus.svg" | relative_url }}" type="image/svg+xml">
+                <img src="{{ "/static/svg/plots/overall_cactus.svg" | relative_url }}" />
             </object>
         </div>
-        <div class="col-xs-6">
-            <object data="./images/overall_bar.svg" type="image/svg+xml">
-                <img src="./images/overall_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <br>
-    <hr>
-    <br>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/models_dots.svg" type="image/svg+xml">
-                <img src="./images/models_dots.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/models_bars.svg" type="image/svg+xml">
-                <img src="./images/models_bars.svg" />
+        <div class="col-6">
+            <object data="{{ "/static/svg/plots/overall_bar.svg" | relative_url }}" type="image/svg+xml">
+                <img src="{{ "/static/svg/plots/overall_bar.svg" | relative_url }}" />
             </object>
         </div>
     </div>
@@ -58,207 +43,50 @@ title: String Benchmarks
     <hr>
     <br>
     <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/concats-balanced_cactus.svg" type="image/svg+xml">
-                <img src="./images/concats-balanced_cactus.svg" />
+        <div class="col-6">
+            <object data="{{ "/static/svg/plots/models_dots.svg" | relative_url }}" type="image/svg+xml">
+                <img src="{{ "/static/svg/plots/models_dots.svg" | relative_url }}" />
             </object>
         </div>
-        <div class="col-xs-6">
-            <object data="./images/concats-balanced_bar.svg" type="image/svg+xml">
-                <img src="./images/concats-balanced_bar.svg" />
+        <div class="col-6">
+            <object data="{{ "/static/svg/plots/models_bars.svg" | relative_url }}" type="image/svg+xml">
+                <img src="{{ "/static/svg/plots/models_bars.svg" | relative_url }}" />
             </object>
         </div>
     </div>
+    <br>
+    <hr>
+    <br>
+
+    {% for suite in site.data.problems %}
     <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/concats-big_cactus.svg" type="image/svg+xml">
-                <img src="./images/concats-big_cactus.svg" />
+        <div class="col-6">
+            <object data="{{
+                    "/static/svg/plots/"
+                    | append: suite.name
+                    | append: "_cactus.svg"
+                    | relative_url }}" type="image/svg+xml">
+                <img src="{{
+                    "/static/svg/plots/"
+                    | append: suite.name
+                    | append: "_cactus.svg"
+                    | relative_url }}" />
             </object>
         </div>
-        <div class="col-xs-6">
-            <object data="./images/concats-big_bar.svg" type="image/svg+xml">
-                <img src="./images/concats-big_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/concats-extracts-big_cactus.svg" type="image/svg+xml">
-                <img src="./images/concats-extracts-big_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/concats-extracts-big_bar.svg" type="image/svg+xml">
-                <img src="./images/concats-extracts-big_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/concats-extracts-small_cactus.svg" type="image/svg+xml">
-                <img src="./images/concats-extracts-small_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/concats-extracts-small_bar.svg" type="image/svg+xml">
-                <img src="./images/concats-extracts-small_bar.svg" />
+        <div class="col-6">
+            <object data="{{
+                    "/static/svg/plots/"
+                    | append: suite.name
+                    | append: "_bar.svg"
+                    | relative_url }}" type="image/svg+xml">
+                <img src="{{
+                    "/static/svg/plots/"
+                    | append: suite.name
+                    | append: "_bar.svg"
+                    | relative_url }}" />
             </object>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/concats-small_cactus.svg" type="image/svg+xml">
-                <img src="./images/concats-small_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/concats-small_bar.svg" type="image/svg+xml">
-                <img src="./images/concats-small_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/lengths-concats_cactus.svg" type="image/svg+xml">
-                <img src="./images/lengths-concats_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/lengths-concats_bar.svg" type="image/svg+xml">
-                <img src="./images/lengths-concats_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/lengths-long_cactus.svg" type="image/svg+xml">
-                <img src="./images/lengths-long_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/lengths-long_bar.svg" type="image/svg+xml">
-                <img src="./images/lengths-long_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/lengths-short_cactus.svg" type="image/svg+xml">
-                <img src="./images/lengths-short_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/lengths-short_bar.svg" type="image/svg+xml">
-                <img src="./images/lengths-short_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/many-regexes_cactus.svg" type="image/svg+xml">
-                <img src="./images/many-regexes_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/many-regexes_bar.svg" type="image/svg+xml">
-                <img src="./images/many-regexes_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/overlaps-big_cactus.svg" type="image/svg+xml">
-                <img src="./images/overlaps-big_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/overlaps-big_bar.svg" type="image/svg+xml">
-                <img src="./images/overlaps-big_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/overlaps-small_cactus.svg" type="image/svg+xml">
-                <img src="./images/overlaps-small_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/overlaps-small_bar.svg" type="image/svg+xml">
-                <img src="./images/overlaps-small_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/regex-big_cactus.svg" type="image/svg+xml">
-                <img src="./images/regex-big_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/regex-big_bar.svg" type="image/svg+xml">
-                <img src="./images/regex-big_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/regex-deep_cactus.svg" type="image/svg+xml">
-                <img src="./images/regex-deep_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/regex-deep_bar.svg" type="image/svg+xml">
-                <img src="./images/regex-deep_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/regex-lengths_cactus.svg" type="image/svg+xml">
-                <img src="./images/regex-lengths_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/regex-lengths_bar.svg" type="image/svg+xml">
-                <img src="./images/regex-lengths_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/regex-pair_cactus.svg" type="image/svg+xml">
-                <img src="./images/regex-pair_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/regex-pair_bar.svg" type="image/svg+xml">
-                <img src="./images/regex-pair_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/regex-small_cactus.svg" type="image/svg+xml">
-                <img src="./images/regex-small_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/regex-small_bar.svg" type="image/svg+xml">
-                <img src="./images/regex-small_bar.svg" />
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <object data="./images/regex-alternating_cactus.svg" type="image/svg+xml">
-                <img src="./images/regex-alternating_cactus.svg" />
-            </object>
-        </div>
-        <div class="col-xs-6">
-            <object data="./images/regex-alternating_bar.svg" type="image/svg+xml">
-                <img src="./images/regex-alternating_bar.svg" />
-            </object>
-        </div>
-    </div>
+    {% endfor %}
+
 </div>
