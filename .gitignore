@@ -3,7 +3,7 @@
 .jekyll-metadata
 vendor
 problems
-_site
+_build
 site/static/txt/samples
 site/static/results
 

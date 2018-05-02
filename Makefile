@@ -13,7 +13,7 @@ JEKYLL_ARGS = --source $(SRC_DIR) --destination $(BUILD_DIR) --config $(CONFIG)
 
 # directories
 SRC_DIR         = site
-BUILD_DIR       = _site
+BUILD_DIR       = _build
 PROBLEM_DIR     = problems
 RESULTS_DIR     = ../runs
 DATA_DIR        = $(SRC_DIR)/_data
@@ -104,11 +104,11 @@ $(PROBLEM_ARCHIVE): $(ZIP_DIR) $(PROBLEM_DIR)
 
 $(SAMPLE_DIR): $(PROBLEM_DIR)
 	mkdir -p $@
-	for i in `ls $(PROBLEM_DIR)`; do \
-		ls $(PROBLEM_DIR)/$$i/*.smt20 | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$i-first.smt20.txt; \
-		ls $(PROBLEM_DIR)/$$i/*.smt20 | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$i-last.smt20.txt; \
-		ls $(PROBLEM_DIR)/$$i/*.smt25 | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$i-first.smt25.txt; \
-		ls $(PROBLEM_DIR)/$$i/*.smt25 | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$i-last.smt25.txt; \
+	for suite in `ls $(PROBLEM_DIR)`; do \
+		ls $(PROBLEM_DIR)/$$suite/*.smt20 | grep -v "-model" | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt20.txt; \
+		ls $(PROBLEM_DIR)/$$suite/*.smt20 | grep -v "-model" | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt20.txt; \
+		ls $(PROBLEM_DIR)/$$suite/*.smt25 | grep -v "-model" | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt25.txt; \
+		ls $(PROBLEM_DIR)/$$suite/*.smt25 | grep -v "-model" | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt25.txt; \
 	done
 	touch $(SAMPLE_DIR)
 
@@ -122,10 +122,10 @@ $(SRC_DIR)/_results/%.md: $(RESULTS_LINK)/% bin/make_date.py | $(RESULTS_LINK)
 clean:
 	$(RM) -r $(BUILD_DIR)
 	$(RM) -r .sass-cache
-	$(RM) $(RESULT_PAGE_DIR)/*.md
 	$(RM) $(PROBLEM_ARCHIVE)
 	bundle clean
 
 nuke: clean
+	$(RM) $(RESULT_PAGE_DIR)/*.md
 	$(RM) -r $(PROBLEM_DIR)
 	$(RM) -r $(ZIP_DIR)
