@@ -116,10 +116,10 @@ $(PROBLEM_ARCHIVE): $(ZIP_DIR) $(PROBLEM_DIR)
 $(SAMPLE_DIR): $(PROBLEM_DIR)
 	mkdir -p $@
 	for suite in `ls $(PROBLEM_DIR)`; do \
-		ls $(PROBLEM_DIR)/$$suite/*.smt20 | grep -v "-model" | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt20.txt; \
-		ls $(PROBLEM_DIR)/$$suite/*.smt20 | grep -v "-model" | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt20.txt; \
-		ls $(PROBLEM_DIR)/$$suite/*.smt25 | grep -v "-model" | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt25.txt; \
-		ls $(PROBLEM_DIR)/$$suite/*.smt25 | grep -v "-model" | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt25.txt; \
+		ls $(PROBLEM_DIR)/$$suite/*.smt20 | grep -v "\-model" | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt20.txt; \
+		ls $(PROBLEM_DIR)/$$suite/*.smt20 | grep -v "\-model" | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt20.txt; \
+		ls $(PROBLEM_DIR)/$$suite/*.smt25 | grep -v "\-model" | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt25.txt; \
+		ls $(PROBLEM_DIR)/$$suite/*.smt25 | grep -v "\-model" | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt25.txt; \
 	done
 	touch $(SAMPLE_DIR)
 
