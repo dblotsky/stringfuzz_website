@@ -24,26 +24,13 @@
 
                 <!-- links -->
                 {% for link in site.data.header %}
-                    {% if link.external %}
-                        {% continue %}
+                    {% if link.divide %}
+                        <li><span class="d-none d-md-block nav-link disabled">|</span></li>
+                    {% else %}
+                        <li class="nav-item {% if page.url == link.uri %}active{% endif %}">
+                            <a class="nav-link" href="{{ link.uri }}">{{ link.name | escape }} <span class="sr-only">(current)</span></a>
+                        </li>
                     {% endif %}
-                    <li class="nav-item {% if page.url == link.uri %}active{% endif %}">
-                        <a class="nav-link" href="{{ link.uri }}">{{ link.name | escape }} <span class="sr-only">(current)</span></a>
-                    </li>
-                {% endfor %}
-
-                <li><span class="d-none d-md-block nav-link disabled">|</span></li>
-                <li><span class="nav-link disabled">External links:</span></li>
-
-                {% for link in site.data.header %}
-
-                    {% unless link.external %}
-                        {% continue %}
-                    {% endunless %}
-
-                    <li class="nav-item {% if page.url == link.uri %}active{% endif %}">
-                        <a class="nav-link" href="{{ link.uri }}">{{ link.name | escape }} <span class="sr-only">(current)</span></a>
-                    </li>
                 {% endfor %}
             </ul>
         </div>

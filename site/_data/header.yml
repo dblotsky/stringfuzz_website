@@ -1,32 +1,36 @@
 -
-    uri: "https://sites.google.com/site/z3strsolver/"
-    name: Z3str3 Solver
-    external: yes
--
-    uri: "https://github.com/dblotsky/stringfuzz"
-    name: Source Code
-    external: yes
--
-    uri: "https://github.com/dblotsky/stringfuzz/releases"
-    name: Releases
-    external: yes
--
-    uri: "https://github.com/dblotsky/stringfuzz/blob/master/README.md"
-    name: Documentation
-    external: yes
--
-    uri: "https://zyh1121.github.io/z3str3Docs/inputLanguage.html"
-    name: Language Reference
-    external: yes
--
     uri: "/results/"
     name: Experiments
 -
+    uri: "/benchmarks/"
+    name: Benchmarks
+-
     uri: "/problems/"
-    name: Problem Sets
+    name: Suites
 -
     uri: "/people/"
     name: People
-# -
-#     uri: "/static/pdf/dblotsky2017.pdf"
-#     name: Paper
+-
+    divide: yes
+-
+    uri: "https://github.com/dblotsky/stringfuzz"
+    name: Source Code
+-
+    uri: "https://github.com/dblotsky/stringfuzz/releases"
+    name: Releases
+-
+    uri: "https://github.com/dblotsky/stringfuzz/blob/master/README.md"
+    name: Documentation
+-
+    divide: yes
+-
+    uri: "https://zyh1121.github.io/z3str3Docs/inputLanguage.html"
+    name: Language Reference
+-
+    uri: "/syntax/"
+    name: SMT-LIB Support
+-
+    divide: yes
+-
+    uri: "https://sites.google.com/site/z3strsolver/"
+    name: Z3str3
