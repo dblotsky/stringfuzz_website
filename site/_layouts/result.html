@@ -8,7 +8,7 @@ layout: text_page
 
 <div class="row prev-next" role="toolbar">
     <div class="col-4 col-sm-3 col-md-2">
-        <a href="{{ prevurl }}" class="btn btn-block btn-outline-dark btn-lg {% unless prevurl %}disabled{% endunless %}" role="button">&larr; Prev</a>
+        <a href="{{ prevurl }}" class="btn btn-block btn-dark btn-lg {% unless prevurl %}disabled{% endunless %}" role="button">&larr; Prev</a>
     </div>
     <div class="col-4 col-sm-6 col-md-8">
         <p class="instructions d-none d-sm-block">
@@ -16,25 +16,25 @@ layout: text_page
         </p>
     </div>
     <div class="col-4 col-sm-3 col-md-2">
-        <a href="{{ nexturl }}" class="btn btn-block btn-outline-dark btn-lg {% unless nexturl %}disabled{% endunless %}" role="button">Next &rarr;</a>
+        <a href="{{ nexturl }}" class="btn btn-block btn-dark btn-lg {% unless nexturl %}disabled{% endunless %}" role="button">Next &rarr;</a>
     </div>
 </div>
 
 <div class="row">
 
+    <!-- get name of this result -->
+    {% capture result_name %}{{ page.date | date: "%Y-%m-%d" }}-{{ page.title | replace: ' ','-' }}{% endcapture %}
+
+    <!-- get prefix for this result in /static/ -->
+    {% capture prefix %}/static/results/{{ result_name }}/graphs/cactus{% endcapture %}
+
+    <!-- add images -->
     {% for problem in site.data.problems %}
-        {% capture imgurl %}{{ '/static/results/'
-            | append: page.title
-            | replace: ' ','-'
-            | downcase
-            | append: '/graphs/cactus/'
-            | append: problem.name
-            | append: '-cactus.png'
-            | relative_url }}{% endcapture %}
+        {% capture imgurl %}{{ prefix }}/{{ problem.name }}-cactus.png{% endcapture %}
 
         <figure class="figure col-6 col-sm-4 col-md-3">
-            <a href="{{ imgurl }}">
-                <img class="figure-img img-fluid rounded" src="{{ imgurl }}">
+            <a href="{{ imgurl | downcase | relative_url }}">
+                <img class="figure-img img-fluid rounded" src="{{ imgurl | downcase | relative_url }}">
             </a>
         </figure>
     {% endfor %}

@@ -1,7 +1,7 @@
 import sys
 import re
 
-date_pattern = r'(?P<month>\d\d)-(?P<day>\d\d)-(?P<year>\d\d\d\d)'
+date_pattern = r'(?P<year>\d\d\d\d)-(?P<month>\d\d)-(?P<day>\d\d)'
 time_pattern = (
     r'from-' +
     r'(?P<from_hour>\d\d)h(?P<from_minute>\d\d)m(?P<from_second>\d\d)s' +
