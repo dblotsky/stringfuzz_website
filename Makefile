@@ -140,10 +140,10 @@ debug:
 $(SAMPLE_DIR): $(GEN_DIR)
 	mkdir -p $@
 	for suite in `ls $(GEN_DIR)`; do \
-		ls $(GEN_DIR)/$$suite/*.smt20 | grep -v "\-model" | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt20.txt; \
-		ls $(GEN_DIR)/$$suite/*.smt20 | grep -v "\-model" | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt20.txt; \
-		ls $(GEN_DIR)/$$suite/*.smt25 | grep -v "\-model" | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt25.txt; \
-		ls $(GEN_DIR)/$$suite/*.smt25 | grep -v "\-model" | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt25.txt; \
+		ls $(GEN_DIR)/$$suite/*.smt20 | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt20.txt; \
+		ls $(GEN_DIR)/$$suite/*.smt20 | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt20.txt; \
+		ls $(GEN_DIR)/$$suite/*.smt25 | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt25.txt; \
+		ls $(GEN_DIR)/$$suite/*.smt25 | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt25.txt; \
 	done
 	touch $(SAMPLE_DIR)
 
