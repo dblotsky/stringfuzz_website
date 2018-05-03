@@ -175,7 +175,7 @@ def main():
     # generate graphs
     plot_cacti(points)
     plot_bars(points)
-    plot_time_for_model(points)
+    # plot_time_for_model(points)
 
 if __name__ == '__main__':
     main()
