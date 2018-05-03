@@ -8,6 +8,10 @@ baseurl: ""
 url: "stringfuzz.dmitryblotsky.com"
 
 markdown: kramdown
+kramdown:
+  input: GFM
+
+highlighter: rouge
 
 collections:
   results:

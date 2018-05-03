@@ -6,7 +6,7 @@ title: Instance Suites
 
 #### StringFuzz Suites
 
-<table class="table table-hover table-sm">
+<table class="table table-bordered table-sm">
     <thead>
         <th scope="col">Name</th>
         <th scope="col">Description</th>
@@ -46,7 +46,7 @@ title: Instance Suites
 
 #### External Suites
 
-<table class="table table-hover table-sm">
+<table class="table table-bordered table-sm">
     <thead>
         <th scope="col">Name</th>
         <th scope="col">Link</th>
@@ -54,9 +54,7 @@ title: Instance Suites
     <tbody>
         <tr>
             <th scope="row">
-                <a href="http://webblaze.cs.berkeley.edu/2010/kaluza/">
-                    Kaluza
-                </a>
+                Kaluza
             </th>
             <td>
                 <a href="http://webblaze.cs.berkeley.edu/2010/kaluza/">
