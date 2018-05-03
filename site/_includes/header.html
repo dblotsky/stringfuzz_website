@@ -23,15 +23,25 @@
                 </li>
 
                 <!-- links -->
-                {% for link in site.data.header %}
-                    {% if link.divide %}
-                        <li><span class="d-none d-md-block nav-link disabled">|</span></li>
-                    {% else %}
-                        <li class="nav-item {% if page.url == link.uri %}active{% endif %}">
-                            <a class="nav-link" href="{{ link.uri }}">{{ link.name | escape }} <span class="sr-only">(current)</span></a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
+                {% include header_link.html name="Suites" uri="/suites/" %}
+                {% include header_link.html name="Documentation" uri="https://github.com/dblotsky/stringfuzz/blob/master/README.md" %}
+                {% include header_link.html name="Releases" uri="https://github.com/dblotsky/stringfuzz/releases" %}
+                {% include header_link.html name="Source Code" uri="https://github.com/dblotsky/stringfuzz" %}
+
+                <li><span class="d-none d-md-block nav-link disabled">|</span></li>
+
+                {% include header_link.html name="Experiments" uri="/results/" %}
+                {% include header_link.html name="Benchmarks" uri="/benchmarks/" %}
+                {% include header_link.html name="People" uri="/people/" %}
+
+                <li><span class="d-none d-md-block nav-link disabled">|</span></li>
+
+                {% include header_link.html name="Language Reference" uri="https://zyh1121.github.io/z3str3Docs/inputLanguage.html" %}
+                {% include header_link.html name="SMT-LIB Support" uri="/syntax/" %}
+
+                <li><span class="d-none d-md-block nav-link disabled">|</span></li>
+
+                {% include header_link.html name="Z3str3" uri="https://sites.google.com/site/z3strsolver/" %}
             </ul>
         </div>
     </nav>
