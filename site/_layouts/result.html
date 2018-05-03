@@ -21,8 +21,8 @@ layout: text_page
 </div>
 
 <div class="row">
-    {% for problem in site.data.problems %}
 
+    {% for problem in site.data.problems %}
         {% capture imgurl %}{{ '/static/results/'
             | append: page.title
             | replace: ' ','-'
@@ -38,6 +38,7 @@ layout: text_page
             </a>
         </figure>
     {% endfor %}
+
 </div>
 
 <script>
