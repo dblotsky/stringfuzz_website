@@ -155,15 +155,17 @@ $(SRC_DIR)/_results/%.md: $(RESULTS_LINK)/% bin/make_date.py | $(RESULTS_LINK)
 
 # maintenance
 clean:
-	$(RM) $(PROBLEMS_FILE)
-	$(RM) -r $(BUILD_DIR)
 	$(RM) -r .sass-cache
 	$(RM) $(GEN_ARCHIVE)
 	bundle clean
 
-nuke: clean
+cleanmore: clean
 	$(RM) $(RESULT_PAGE_DIR)/*.md
+	$(RM) $(PROBLEMS_FILE)
 	$(RM) -r $(GEN_DIR)
+
+nuke: cleanmore
+	$(RM) -r $(BUILD_DIR)
 	$(RM) -r $(ZIP_DIR)
 
 .PHONY: $(BUILD_DIR)

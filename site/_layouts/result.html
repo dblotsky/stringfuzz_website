@@ -6,6 +6,17 @@ layout: text_page
 
 {{ content }}
 
+<h2 class="row">
+    <div class="col-6">
+        {{ page.date | date: "%b %d, %Y" }}
+    </div>
+    <div class="col-6 text-right">
+        at {{ page.date | date: "%H:%M" }}
+    </div>
+</h2>
+
+<hr>
+
 <div class="row prev-next" role="toolbar">
     <div class="col-4 col-sm-3 col-md-2">
         <a href="{{ prevurl }}" class="btn btn-block btn-dark btn-lg {% unless prevurl %}disabled{% endunless %}" role="button">&larr; Prev</a>
