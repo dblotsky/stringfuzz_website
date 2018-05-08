@@ -131,6 +131,7 @@ $(SRC_DIR)/_results/%.md: $(RESULTS_LINK)/% bin/make_date.py | $(RESULTS_LINK)
 
 # maintenance
 clean:
+	$(RM) $(PROBLEMS_FILE)
 	$(RM) -r $(BUILD_DIR)
 	$(RM) -r .sass-cache
 	$(RM) $(PROBLEM_ARCHIVE)

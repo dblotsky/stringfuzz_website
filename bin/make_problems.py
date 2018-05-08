@@ -61,6 +61,9 @@ def main():
 
     # parse config
     config = parse_config(config_file_path)
+    if config is None:
+        print('ERROR: failed to parse config from {!r}'.format(config_file_path), file=sys.stderr)
+        exit(1)
 
     # generate each suite
     for suite in config:
