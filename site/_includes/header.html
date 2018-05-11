@@ -1,23 +1,16 @@
 <header>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
         <!-- links -->
-        {% for link in site.data.header-left %} {% if link.divide %}
-        <li>
-            <span class="d-none d-md-block nav-link disabled">|</span>
-        </li>
-        {% else %}
-        <li class="nav-item {% if page.url == link.uri %}active{% endif %}">
-            <a class="nav-link" href="{{ link.uri }}">{{ link.name | escape }}
-                <span class="sr-only">(current)</span>
-            </a>
-        </li>
-        {% endif %} {% endfor %}
+        {% include header_link.html name="Suites" uri="/problems/" %}
+        {% include header_link.html name="Benchmarks" uri="/benchmarks/" %}
+        {% include header_link.html name="Source Code" uri="https://github.com/dblotsky/stringfuzz" %}
+        {% include header_link.html name="People" uri="/people/" %}
         </ul>
     </div>
     <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto" href="{{ " / " | relative_url }}">
+        <a class="navbar-brand mx-auto" href="/">
             <span class="curly">{ </span>
             {{ site.title | escape }}
             <span class="curly"> }</span>
@@ -29,18 +22,12 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <!-- links -->
-            {% for link in site.data.header-right %} {% if link.divide %}
-            <li>
-                <span class="d-none d-md-block nav-link disabled">|</span>
-            </li>
-            {% else %}
-            <li class="nav-item {% if page.url == link.uri %}active{% endif %}">
-                <a class="nav-link" href="{{ link.uri }}">{{ link.name | escape }}
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            {% endif %} {% endfor %}
-            </ul>
+            {% include header_link.html name="Language Reference" uri="https://zyh1121.github.io/z3str3Docs/inputLanguage.html" %}
+            {% include header_link.html name="Language Support" uri="/syntax/" %}
+
+            <li><span class="d-none d-md-block nav-link disabled">|</span></li>
+
+            {% include header_link.html name="Z3str3" uri="https://sites.google.com/site/z3strsolver/" %}
         </ul>
     </div>
 </nav>

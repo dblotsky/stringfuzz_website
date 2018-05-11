@@ -1,18 +1,7 @@
 ---
 layout: text_page
 ---
-
-<div class="container">
-    <div class="front">
-        <h1>StringFuzz</h1>
-        <p class="lead">
-            An extensible fuzzer for automatically generating and transforming SMT-LIB string constraints, aimed at testing SMT string solvers.
-        </p>
-    </div>
-</div>
-<br>
-
-StringFuzz is a problem instance generator and fuzzer for SMT string solvers like [CVC][cvc4], [Z3][z3str3], and [norn][norn]. It is useful for string solver **developers** and **testers**, and can help expose **bugs** and **performance issues**. It can be installed [here][install].
+StringFuzz is a problem instance generator and fuzzer for SMT string solvers like [CVC][cvc4], [Z3][z3str3], and [norn][norn]. It is useful for string solver **developers** and **testers**, and can help expose **bugs** and **performance issues**. See installation instructions [here][install].
 
 ### Strings
 
