@@ -1,0 +1,11 @@
+-
+    uri: "https://zyh1121.github.io/z3str3Docs/inputLanguage.html"
+    name: Language Reference
+-
+    uri: "/syntax/"
+    name: SMT-LIB Support
+-
+    divide: yes
+-
+    uri: "https://sites.google.com/site/z3strsolver/"
+    name: Z3str3

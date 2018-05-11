@@ -1,13 +1,18 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
-    padding-top: 56px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
 
 .curly {
-    font-size: 2em;
-    position: absolute;
+    font-size: 1em;
     padding: 0px;
-    margin-top: -0.2em;
-    margin-left: -0.25em;
+    color: darkgray;
+    font-weight: bold;
 }
 
 .results-table {
@@ -29,4 +34,21 @@ footer {
     margin-top: 1%;
     width: 100%;
     text-align: center;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px;
+    font-size: 80%;
+}
+
+.front {
+    padding-top: 30px;
+    margin: auto;
+    text-align: center;
+    max-width: 700px;
 }
