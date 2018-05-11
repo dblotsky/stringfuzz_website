@@ -100,9 +100,6 @@ def main():
                 smt25_file_path = os.path.join(suite_dir_path, file_name) + '.smt25'
                 smt20_file_path = os.path.join(suite_dir_path, file_name) + '.smt20'
 
-                smt25_model_file_path = os.path.join(suite_dir_path, file_name) + '-model.smt25'
-                smt20_model_file_path = os.path.join(suite_dir_path, file_name) + '-model.smt20'
-
                 # generate problem
                 ast = generator(**args)
                 ast = [smt_string_logic()] + ast
@@ -110,8 +107,6 @@ def main():
                 # write out the files
                 generate_file(ast, SMT_25_STRING, smt25_file_path)
                 generate_file(ast, SMT_20_STRING, smt20_file_path)
-                generate_file(ast + [smt_get_model()], SMT_25_STRING, smt25_model_file_path)
-                generate_file(ast + [smt_get_model()], SMT_20_STRING, smt20_model_file_path)
 
             # increment arg
             x += int(suite['increment'])

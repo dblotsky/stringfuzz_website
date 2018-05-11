@@ -7,7 +7,17 @@ description: >
 baseurl: ""
 url: "stringfuzz.dmitryblotsky.com"
 
+timezone: UTC
+
+keep_files:
+  - static/results
+  - static/svg
+
 markdown: kramdown
+kramdown:
+  input: GFM
+
+highlighter: rouge
 
 collections:
   results:
