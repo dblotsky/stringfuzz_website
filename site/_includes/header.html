@@ -1,37 +1,43 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 
-        <!-- title -->
-        <a class="navbar-brand" href="{{ "/" | relative_url }}">
-            {{ site.title | escape }}
-        </a>
-
-        <!-- button for toggling navigation on small screens -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- navbar content -->
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <!-- left links -->
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
             <ul class="navbar-nav mr-auto">
+                {% include header_link.html name="Suites" uri="/problems/" %}
+                {% include header_link.html name="Benchmarks" uri="/benchmarks/" %}
+                <li><span class="d-none d-md-block nav-link disabled">|</span></li>
+                {% include header_link.html name="Releases" uri="https://github.com/dblotsky/stringfuzz/releases" %}
+                {% include header_link.html name="Docs" uri="https://github.com/dblotsky/stringfuzz/blob/master/README.md" %}
+                {% include header_link.html name="Code" uri="https://github.com/dblotsky/stringfuzz" %}
+                <li><span class="d-none d-md-block nav-link disabled">|</span></li>
+                {% include header_link.html name="People" uri="/people/" %}
+            </ul>
+        </div>
 
-                <!-- curly brace -->
-                <li class="nav-item">
-                    <span class="d-none d-md-block curly nav-link disabled">}</span>
-                    &nbsp;
-                    &nbsp;
-                </li>
+        <!-- center logo -->
+        <div class="mx-auto order-0">
+            <a class="navbar-brand mx-auto" href="{{ "/" | relative_url }}">
+                <span class="curly">{ </span>
+                {{ site.title | escape }}
+                <span class="curly"> }</span>
+            </a>
 
-                <!-- links -->
-                {% for link in site.data.header %}
-                    {% if link.divide %}
-                        <li><span class="d-none d-md-block nav-link disabled">|</span></li>
-                    {% else %}
-                        <li class="nav-item {% if page.url == link.uri %}active{% endif %}">
-                            <a class="nav-link" href="{{ link.uri }}">{{ link.name | escape }} <span class="sr-only">(current)</span></a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
+            <!-- button for toggling navigation on small screens -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <!-- right links -->
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                {% include header_link.html name="Experiments" uri="/results/" %}
+                <li><span class="d-none d-md-block nav-link disabled">|</span></li>
+                {% include header_link.html name="Language Reference" uri="https://zyh1121.github.io/z3str3Docs/inputLanguage.html" %}
+                {% include header_link.html name="Language Support" uri="/syntax/" %}
+                <li><span class="d-none d-md-block nav-link disabled">|</span></li>
+                {% include header_link.html name="Z3str3" uri="https://sites.google.com/site/z3strsolver/" %}
             </ul>
         </div>
     </nav>

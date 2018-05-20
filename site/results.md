@@ -30,7 +30,9 @@ title: Results
         </div>
     </span>
     {% for result in results reversed %}
-        <a href="{{ result.url }}" class="list-group-item">{{ result.title }}</a>
+        <a href="{{ result.url }}" class="list-group-item list-group-item-action">
+            {{ result.date | date: "%b %d, %Y at %H:%M" }}
+        </a>
     {% endfor %}
 </div>
 

@@ -3,11 +3,10 @@ body {
 }
 
 .curly {
-    font-size: 2em;
-    position: absolute;
+    font-size: 1em;
     padding: 0px;
-    margin-top: -0.2em;
-    margin-left: -0.25em;
+    color: darkgray;
+    font-weight: bold;
 }
 
 .results-table {
@@ -29,4 +28,13 @@ footer {
     margin-top: 1%;
     width: 100%;
     text-align: center;
+}
+
+.highlight {
+    border-radius: 7px;
+}
+
+pre.highlight {
+    padding: 1em;
+    box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.1);
 }
