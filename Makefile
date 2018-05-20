@@ -23,6 +23,9 @@ SAMPLE_DIR      = $(STATIC_DIR)/txt/samples
 RESULTS_LINK    = $(STATIC_DIR)/results
 RESULT_PAGE_DIR = $(SRC_DIR)/_results
 
+BENCH_DIR = $(STATIC_DIR)/csv/benchmarks
+PLOT_DIR = $(STATIC_DIR)/svg/plots
+
 # files
 CONFIG = _config.yml
 
@@ -58,14 +61,18 @@ build: $(BUILD_DIR)
 serve: $(BUILD_DIR)
 	$(JEKYLL) serve $(JEKYLL_ARGS)
 
-zips: $(ZIP_DIR)
+bench: $(BENCH_DIR)
 
-deploy: $(BUILD_DIR)
-	rsync $(ROPTIONS) $(BUILD_DIR)/ $(DEPLOY_USER)@$(DEPLOY_SERVER):$(DEPLOY_DIR)/
+plot: $(PLOT_DIR)
+
+zips: $(ZIP_DIR)
 
 results: $(RESULT_PAGES)
 
 link_results: $(RESULTS_LINK)
+
+deploy: $(BUILD_DIR)
+	rsync $(ROPTIONS) $(BUILD_DIR)/ $(DEPLOY_USER)@$(DEPLOY_SERVER):$(DEPLOY_DIR)/
 
 # real targets
 /usr/local/bin/bundle:
@@ -74,20 +81,24 @@ link_results: $(RESULTS_LINK)
 ./vendor/bundle: Gemfile /usr/local/bin/bundle
 	bundle
 
+$(BENCH_DIR): $(PROBLEM_DIR)
+	mkdir -p $(BENCH_DIR)
+	python3 bin/bench.py $(PROBLEM_DIR) $(BENCH_DIR)
+
+$(PLOT_DIR): $(BENCH_DIR)
+	mkdir -p $(PLOT_DIR)
+	python3 bin/plot.py $(BENCH_DIR) $(PLOT_DIR)
+
 $(RESULTS_LINK): $(RESULTS_DIR)
 	ln -s $(realpath $(RESULTS_DIR)) $(RESULTS_LINK)
 
 $(BUILD_DIR): $(SOURCES) $(ZIP_DIR) $(PROBLEM_ARCHIVE) $(SAMPLE_DIR)
 	$(JEKYLL) build $(JEKYLL_ARGS)
 
-ifndef NO_PROBLEMS
-$(BUILD_DIR): $(PROBLEM_DIR)
-endif
-
 $(PROBLEMS_FILE): $(PROBLEMS_FILE_SRC) bin/render_problem_list.py
 	python3 bin/render_problem_list.py $< < $< > $@
 
-$(PROBLEM_DIR): $(PROBLEMS_FILE)
+$(PROBLEM_DIR): $(PROBLEMS_FILE) bin/make_problems.py
 	python3 bin/make_problems.py $@ $(PROBLEMS_FILE)
 	touch $(PROBLEM_DIR)
 
@@ -105,10 +116,10 @@ $(PROBLEM_ARCHIVE): $(ZIP_DIR) $(PROBLEM_DIR)
 $(SAMPLE_DIR): $(PROBLEM_DIR)
 	mkdir -p $@
 	for suite in `ls $(PROBLEM_DIR)`; do \
-		ls $(PROBLEM_DIR)/$$suite/*.smt20 | grep -v "-model" | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt20.txt; \
-		ls $(PROBLEM_DIR)/$$suite/*.smt20 | grep -v "-model" | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt20.txt; \
-		ls $(PROBLEM_DIR)/$$suite/*.smt25 | grep -v "-model" | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt25.txt; \
-		ls $(PROBLEM_DIR)/$$suite/*.smt25 | grep -v "-model" | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt25.txt; \
+		ls $(PROBLEM_DIR)/$$suite/*.smt20 | grep -v "\-model" | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt20.txt; \
+		ls $(PROBLEM_DIR)/$$suite/*.smt20 | grep -v "\-model" | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt20.txt; \
+		ls $(PROBLEM_DIR)/$$suite/*.smt25 | grep -v "\-model" | head -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-first.smt25.txt; \
+		ls $(PROBLEM_DIR)/$$suite/*.smt25 | grep -v "\-model" | tail -n 1 | xargs -I% cp % $(SAMPLE_DIR)/$$suite-last.smt25.txt; \
 	done
 	touch $(SAMPLE_DIR)
 
@@ -120,6 +131,7 @@ $(SRC_DIR)/_results/%.md: $(RESULTS_LINK)/% bin/make_date.py | $(RESULTS_LINK)
 
 # maintenance
 clean:
+	$(RM) $(PROBLEMS_FILE)
 	$(RM) -r $(BUILD_DIR)
 	$(RM) -r .sass-cache
 	$(RM) $(PROBLEM_ARCHIVE)

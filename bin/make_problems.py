@@ -6,7 +6,7 @@ import random
 from stringfuzz.constants import SMT_20_STRING, SMT_25_STRING
 from stringfuzz.generators import concats, overlaps, lengths, regex, equality
 from stringfuzz.generator import generate_file
-from stringfuzz.smt import smt_string_logic
+from stringfuzz.smt import smt_string_logic, smt_get_model
 
 GENERATORS = {
     'concats':  concats,
@@ -61,6 +61,9 @@ def main():
 
     # parse config
     config = parse_config(config_file_path)
+    if config is None:
+        print('ERROR: failed to parse config from {!r}'.format(config_file_path), file=sys.stderr)
+        exit(1)
 
     # generate each suite
     for suite in config:
@@ -93,16 +96,22 @@ def main():
 
                 # get file paths
                 file_name = '{name}-{x:0>5}-{y}'.format(name=suite['name'], x=x, y=y)
+
                 smt25_file_path = os.path.join(suite_dir_path, file_name) + '.smt25'
                 smt20_file_path = os.path.join(suite_dir_path, file_name) + '.smt20'
+
+                smt25_model_file_path = os.path.join(suite_dir_path, file_name) + '-model.smt25'
+                smt20_model_file_path = os.path.join(suite_dir_path, file_name) + '-model.smt20'
 
                 # generate problem
                 ast = generator(**args)
                 ast = [smt_string_logic()] + ast
 
-                # write it out in two languages
+                # write out the files
                 generate_file(ast, SMT_25_STRING, smt25_file_path)
                 generate_file(ast, SMT_20_STRING, smt20_file_path)
+                generate_file(ast + [smt_get_model()], SMT_25_STRING, smt25_model_file_path)
+                generate_file(ast + [smt_get_model()], SMT_20_STRING, smt20_model_file_path)
 
             # increment arg
             x += int(suite['increment'])
