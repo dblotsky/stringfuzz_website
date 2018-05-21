@@ -20,13 +20,14 @@ INSTANCE_DIR = instances
 GEN_DIR      = $(INSTANCE_DIR)/generated
 XFORM_DIR    = $(INSTANCE_DIR)/transformed
 
-RESULTS_DIR     = ../runs
-DATA_DIR        = $(SRC_DIR)/_data
-STATIC_DIR      = $(SRC_DIR)/static
-ZIP_DIR         = $(STATIC_DIR)/zip
-SAMPLE_DIR      = $(STATIC_DIR)/txt/samples
-RESULTS_LINK    = $(STATIC_DIR)/results
-RESULT_PAGE_DIR = $(SRC_DIR)/_results
+RESULTS_DIR       = ../runs
+DATA_DIR          = $(SRC_DIR)/_data
+STATIC_DIR        = $(SRC_DIR)/static
+ZIP_DIR           = $(STATIC_DIR)/zip
+SAMPLE_DIR        = $(STATIC_DIR)/txt/samples
+SITE_INSTANCE_DIR = $(STATIC_DIR)/txt/instances
+RESULTS_LINK      = $(STATIC_DIR)/results
+RESULT_PAGE_DIR   = $(SRC_DIR)/_results
 
 BENCH_DIR = $(STATIC_DIR)/csv/benchmarks
 PLOT_DIR = $(STATIC_DIR)/svg/plots
@@ -101,7 +102,7 @@ $(PLOT_DIR): $(BENCH_DIR)
 $(RESULTS_LINK): $(RESULTS_DIR)
 	ln -s $(realpath $(RESULTS_DIR)) $(RESULTS_LINK)
 
-$(BUILD_DIR): $(SOURCES) $(ZIP_DIR) $(GEN_ARCHIVE) $(SAMPLE_DIR)
+$(BUILD_DIR): $(SOURCES) $(ZIP_DIR) $(GEN_ARCHIVE) $(SAMPLE_DIR) $(SITE_INSTANCE_DIR)
 	$(JEKYLL) $(JEKYLL_COMMAND) $(JEKYLL_ARGS)
 
 $(PROBLEMS_FILE): $(PROBLEMS_FILE_SRC) bin/render_problem_list.py
@@ -132,6 +133,11 @@ $(GEN_ARCHIVE): $(GEN_DIR) | $(ZIP_DIR)
 $(XFORM_ARCHIVE): $(XFORM_DIR) | $(ZIP_DIR)
 	cd $(dir $(XFORM_DIR)) && zip -r archive.zip $(notdir $(XFORM_DIR))
 	mv $(dir $(XFORM_DIR))archive.zip $(XFORM_ARCHIVE)
+
+$(SITE_INSTANCE_DIR): $(GEN_DIR)
+	mkdir -p $@
+	cp -r $(GEN_DIR)/* $(SITE_INSTANCE_DIR)
+	touch $(SITE_INSTANCE_DIR)
 
 $(SAMPLE_DIR): $(GEN_DIR)
 	mkdir -p $@
