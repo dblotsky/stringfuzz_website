@@ -57,7 +57,7 @@ The results directory contains experiment results: one directory per experiment.
 
 | Directory | Name Format | Contents |
 | --------- | ----------- | -------- |
-| Root | `DAY`-`MONTH`-`YEAR`-from-`HOUR`h`MINUTE`m`SECOND`s-to-`HOUR`h`MINUTE`m`SECOND`s | Graphs and Results (optional) directories |
+| Root | `YEAR`-`MONTH`-`DAY`-from-`HOUR`h`MINUTE`m`SECOND`s-to-`HOUR`h`MINUTE`m`SECOND`s | Graphs and Results (optional) directories |
 | Graphs | `graphs` | Cactus and Versus directories |
 | Results (optional) | `results` | Results files (JSON/CSV), one for each unique tuple: (solver, problem set) |
 | Cactus | `cactus` | Cactus plot images, one for each problem set |
@@ -65,7 +65,7 @@ The results directory contains experiment results: one directory per experiment.
 
 Here is an example experiment directory:
 
-    01-24-2018-from-08h25m36s-to-10h39m06s
+    2018-01-24-from-08h25m36s-to-10h39m06s
         graphs
             cactus
                 concats-balanced-cactus.png

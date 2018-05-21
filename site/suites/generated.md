@@ -1,12 +1,12 @@
 ---
 layout: text_page
-permalink: /problems/
-title: Problem Sets
+permalink: /suites/generated/
+title: StringFuzz Generated Suite
 ---
 
 <div class="alert alert-info" role="alert">
     All problems in one archive can be found here:
-    <a href="{{ "/static/zip/problems.zip" }}">problems.zip</a>.
+    <a href="{{ "/static/zip/generated.zip" | relative_url }}">generated.zip</a>.
 </div>
 
 <table class="table table-bordered">

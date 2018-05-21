@@ -1,0 +1,8 @@
+<li class="nav-item {% if page.url == include.uri %}active{% endif %}">
+    <a class="nav-link" href="{{ include.uri | relative_url }}">
+        {{ include.name | escape }}
+        {% if page.url == include.uri %}
+            <span class="sr-only">(current)</span>
+        {% endif %}
+    </a>
+</li>
