@@ -41,9 +41,9 @@ To serve the site locally on port 4000, run:
 
     make serve
 
-To only generate the problem suite, run:
+To only generate the problem suites, run:
 
-    make problems
+    make suites
 
 Deployment
 ==========
