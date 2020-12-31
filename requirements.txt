@@ -1,2 +1,2 @@
 pygal==2.4.0
-PyYAML==3.12
+PyYAML==5.3.1
