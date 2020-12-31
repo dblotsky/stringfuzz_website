@@ -1,6 +1,7 @@
 # directories
 .sass-cache
 .jekyll-metadata
+.jekyll-cache
 vendor
 instances
 _build
